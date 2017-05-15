@@ -1,0 +1,86 @@
+.warm {
+    background-color: #E1B16A !important;
+}
+
+.warm-text {
+    color: #E1B16A !important;
+}
+
+.ocean-breeze {
+    background-color: #78A5A3 !important;
+}
+
+.ocean-breeze-text {
+    color: #78A5A3 !important;
+}
+
+.punch {
+    background-color: #CE5A57 !important;
+}
+
+.punch-text {
+    color: #CE5A57 !important;
+}
+
+.faded-navy {
+    background-color: #444C5C !important;
+}
+
+.faded-navy-text {
+    color: #444C5C !important;
+}
+
+.font-changa-one {
+    font-family: 'Changa One', cursive;
+}
+
+.font-luckiest-guy {
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.font-josefin-sans {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.font-varela-round {
+    font-family: 'Varela Round', sans-serif;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #CE5A57;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #CE5A57;
+    box-shadow: 0 1px 0 0 #CE5A57;
+}
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #CE5A57;
+    box-shadow: 0 1px 0 0 #CE5A57;
+}
+
+thead {
+    font-size: x-large !important;
+}
+
+.drop-box {
+    background-color: #FAFFFF;
+    border: 3px dashed #78A5A3;
+    height: 300px;
+}
+
+.drag-over {
+    background-color: #FAFFFF;
+    border: 3px dashed #CE5A57;
+    height: 300px;
+}
+
+.placeholder {
+    color: darkgray;
+}
+
+.thumbnail {
+    width:70% !important;
+    height: 70% !important;
+}
