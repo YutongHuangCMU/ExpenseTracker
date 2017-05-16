@@ -1,0 +1,24 @@
+<div class="row" ng-show="isAdmin">
+    <div class="col s8 offset-s2">
+        <h4 class="font-changa-one faded-navy-text">All Logs: </h4>
+        <div class="row" ng-repeat="list in allList | orderBy: 'Username' : true">
+            <h5 class="font-varela-round warm-text">{{list._id}}:</h5>
+            <table>
+                <thead class="font-varela-round ocean-breeze-text">
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody class="font-varela-round faded-navy-text">
+                <tr ng-repeat="x in list.logs | orderBy: 'Date' : true">
+                    <td>{{x.date}}</td>
+                    <td>{{x.amount}}</td>
+                    <td>{{x.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

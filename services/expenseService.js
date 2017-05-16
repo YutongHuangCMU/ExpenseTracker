@@ -44,9 +44,26 @@ var updateExpense = function (_id, amount, date, des, callback) {
     });
 };
 
+var getAllLogs = function (callback) {
+    ExpenseModel.aggregate([
+        {
+            $group: {
+                _id: "$username",
+                logs: {
+                    $push: "$$ROOT"
+                }
+            }
+        }
+    ] , function(err, data) {
+        console.log(data);
+        callback(data);
+    });
+};
+
 module.exports = {
     logExpense: logExpense,
     getMyLogs: getMyLogs,
     deleteLog: deleteLog,
-    updateExpense: updateExpense
+    updateExpense: updateExpense,
+    getAllLogs: getAllLogs
 };

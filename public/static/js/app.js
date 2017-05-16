@@ -9,5 +9,9 @@ app.config(function ($routeProvider) {
         .when("/report", {
             templateUrl:"./public/views/report.html",
             controller: "reportController"
-    })
+        })
+        .when("/logs", {
+            templateUrl:"./public/views/logs.html",
+            controller: "logController"
+        })
 });

@@ -2,11 +2,15 @@ var app = angular.module('expenseTracker');
 
 app.controller('homeController', function($window, $scope, $http, $uibModal, $location) {
     $scope.username = JSON.parse($window.sessionStorage.username || '{}');
+    $scope.isLoggedIn = JSON.parse($window.sessionStorage.isLoggedIn || false);
+    $scope.isAdmin = JSON.parse($window.sessionStorage.isAdmin || false);
+
     $scope.$watch(function () {
         return $window.sessionStorage.isLoggedIn;
     }, function (newValue, oldValue) {
         $scope.isLoggedIn = JSON.parse(newValue || false);
         if ($scope.isLoggedIn) {
+            $scope.isAdmin = JSON.parse($window.sessionStorage.isAdmin || false);
             getMyLogs();
         }
     });
@@ -46,6 +50,10 @@ app.controller('homeController', function($window, $scope, $http, $uibModal, $lo
 
     $scope.report = function () {
         $location.path("/report");
+    };
+
+    $scope.allLogs = function () {
+        $location.path("/logs");
     };
 
     var getMyLogs = function () {

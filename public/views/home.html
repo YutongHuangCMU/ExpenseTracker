@@ -1,4 +1,14 @@
-<div class="row">
+<div class="row center-align" ng-show="!isLoggedIn">
+    <br><br><br>
+    <h3 class="font-changa-one warm-text">Welcome!</h3>
+    <div class="col s6 offset-s3">
+        <p class="font-varela-round faded-navy-text">
+            Welcome to your personal expense tracker, please sign in or sign up using the buttons on the right top corner.
+        </p>
+    </div>
+</div>
+
+<div class="row" ng-show="isLoggedIn">
     <div class="col s8 offset-s2">
         <h4 class="font-changa-one faded-navy-text">To Log Your Expense:</h4>
         <div class="card">
@@ -32,32 +42,33 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-    <div class="row">
-        <div class="col s8 offset-s2">
-            <h4 class="font-changa-one faded-navy-text">Expense Logs: </h4>
-            <button class="btn punch" ng-click="report()">Report</button>
-            <table>
-                <thead class="font-varela-round ocean-breeze-text">
-                <tr>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Description</th>
-                    <th>Option</th>
-                </tr>
-                </thead>
-                <tbody class="font-varela-round faded-navy-text">
-                <tr ng-repeat="x in list | orderBy: 'Date' : true">
-                    <td>{{x.date}}</td>
-                    <td>{{x.amount}}</td>
-                    <td>{{x.description}}</td>
-                    <td><button class="btn-sm ocean-breeze-text" ng-click="update(x)">update</button>
-                        <button class="btn-sm ocean-breeze-text" ng-click="delete(x)">delete</button></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
 
+<div class="row" ng-show="isLoggedIn">
+    <div class="col s8 offset-s2">
+        <h4 class="font-changa-one faded-navy-text">Expense Logs: </h4>
+        <button class="btn punch" ng-click="report()">Report</button>
+        <button class="btn warm" ng-show="isAdmin" ng-click="allLogs()">All Logs</button>
+        <table>
+            <thead class="font-varela-round ocean-breeze-text">
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Option</th>
+            </tr>
+            </thead>
+            <tbody class="font-varela-round faded-navy-text">
+            <tr ng-repeat="x in list | orderBy: 'Date' : true">
+                <td>{{x.date}}</td>
+                <td>{{x.amount}}</td>
+                <td>{{x.description}}</td>
+                <td><button class="btn-sm ocean-breeze-text" ng-click="update(x)">update</button>
+                    <button class="btn-sm ocean-breeze-text" ng-click="delete(x)">delete</button></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+

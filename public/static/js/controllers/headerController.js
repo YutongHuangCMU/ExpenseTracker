@@ -19,7 +19,7 @@ app.controller('headerController', function($window, $scope, $uibModal, $locatio
             $scope.isLoggedIn = true;
             $scope.isAdmin = data.isAdmin;
             $scope.username = data.username;
-            updateSessionStorage(data.username, data.token, true, $scope.isAdmin);
+            updateSessionStorage(data.username, data.token, true, data.isAdmin);
         });
     }
 
@@ -31,6 +31,7 @@ app.controller('headerController', function($window, $scope, $uibModal, $locatio
     };
     $scope.logout = function() {
         $scope.isLoggedIn = false;
+        $scope.isAdmin = false;
         $scope.username = {};
         updateSessionStorage({}, {}, false, false);
         $location.path("/");

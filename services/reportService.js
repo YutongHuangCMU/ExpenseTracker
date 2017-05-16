@@ -52,7 +52,6 @@ var getReportDateTime = function (username, info, callback) {
             }
         }
     ] , function(err, data) {
-        console.log(data);
         callback(data);
     });
 };

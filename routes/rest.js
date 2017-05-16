@@ -81,6 +81,13 @@ router.get("/getMyLogs", jsonParser, function (req, res) {
     }
 });
 
+router.get("/allLogs", jsonParser, function (req, res) {
+    expenseService.getAllLogs(function (allList) {
+        res.json(allList);
+    });
+});
+
+
 router.post("/deleteLog", jsonParser, function (req, res) {
     var log = req.body.log;
     expenseService.deleteLog(log, function (err, mes) {
