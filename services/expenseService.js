@@ -1,14 +1,14 @@
 var ExpenseModel = require("../models/expenseModel");
 
-var logExpense = function (username, amount, date, time, des, callback) {
+var logExpense = function (username, amount, date, des, callback) {
     if (amount == 0) {
         callback("Amount cannot be 0!", null);
     }
+    var newDate = new Date(date);
     var newExpense = new ExpenseModel({
         username: username,
         amount: amount,
-        date: date,
-        time: time,
+        date: newDate,
         description: des
     });
     newExpense.save();
@@ -30,11 +30,11 @@ var deleteLog = function (log, callback) {
     callback(null, "success");
 };
 
-var updateExpense = function (_id, amount, date, time, des, callback) {
+var updateExpense = function (_id, amount, date, des, callback) {
+    var newDate = new Date(date);
     ExpenseModel.findOneAndUpdate({_id: _id}, {
         amount: amount,
-        date: date,
-        time: time,
+        date: newDate,
         description: des
     }, {upsert:true}, function(err, doc){
         if (err) {

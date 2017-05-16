@@ -3,6 +3,8 @@ var router = express.Router();
 var bodyParser = require("body-parser");
 var userService = require("../services/userService");
 var expenseService = require("../services/expenseService");
+var reportService = require("../services/reportService");
+
 
 var jsonParser = bodyParser.json();
 
@@ -35,9 +37,8 @@ router.post("/logExpense", jsonParser, function (req, res) {
     var username = req.body.username;
     var amount = req.body.amount;
     var date = req.body.date;
-    var time = req.body.time;
     var des = req.body.des;
-    expenseService.logExpense(username, amount, date, time, des, function (err, mes) {
+    expenseService.logExpense(username, amount, date, des, function (err, mes) {
         res.json({
             err: err,
             res: mes
@@ -49,9 +50,8 @@ router.post("/updateExpense", jsonParser, function (req, res) {
     var _id = req.body._id;
     var amount = req.body.amount;
     var date = req.body.date;
-    var time = req.body.time;
     var des = req.body.des;
-    expenseService.updateExpense(_id, amount, date, time, des, function (err, mes) {
+    expenseService.updateExpense(_id, amount, date, des, function (err, mes) {
         res.json({
             err: err,
             res: mes
@@ -90,6 +90,26 @@ router.post("/deleteLog", jsonParser, function (req, res) {
         });
     });
 });
+
+router.get("/report/:username/:date1/:date2", function(req, res) {
+    console.log("enter");
+    reportService.getReportIntervalTotal(req.params.username, req.params.date1, req.params.date2, function(err, data) {
+        res.json({
+            err: err,
+            data: data
+        });
+    });
+});
+
+router.get("/report/:username/:info", function(req, res) {
+    console.log("enter2");
+    reportService.getReportDateTime(req.params.username, req.params.info, function(data) {
+        res.json(data);
+    });
+});
+
+
+
 
 function getToken(authHeader) {
     var splits = authHeader.split(' ');

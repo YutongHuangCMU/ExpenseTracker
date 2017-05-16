@@ -1,6 +1,6 @@
 var app = angular.module('expenseTracker');
 
-app.controller('homeController', function($window, $scope, $http, $uibModal) {
+app.controller('homeController', function($window, $scope, $http, $uibModal, $location) {
     $scope.username = JSON.parse($window.sessionStorage.username || '{}');
     $scope.$watch(function () {
         return $window.sessionStorage.isLoggedIn;
@@ -16,28 +16,12 @@ app.controller('homeController', function($window, $scope, $http, $uibModal) {
         } else {
             $http.defaults.headers.common.Authorization = undefined;
         }
-        var year = $scope.date.getFullYear();
-        var month = $scope.date.getMonth() + 1;
-        var day = $scope.date.getDate();
-        var hour = $scope.time.getHours();
-        var min = $scope.time.getMinutes();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        var date = month+"/"+day+"/"+year;
-        if (hour < 10) {
-            hour = "0" + hour;
-        }
-        if (min < 10) {
-            min = "0" + min;
-        }
-        var time = hour+":"+min;
         console.log("date: " + $scope.date);
+        var date = new Date($scope.date);
         $http.post("api/v1/logExpense", {
             username: $scope.username,
             amount: $scope.amount,
             date: date,
-            time: time,
             des: $scope.des
         })
             .success(function(data) {
@@ -58,6 +42,10 @@ app.controller('homeController', function($window, $scope, $http, $uibModal) {
             .success(function (data) {
                 getMyLogs();
             });
+    };
+
+    $scope.report = function () {
+        $location.path("/report");
     };
 
     var getMyLogs = function () {

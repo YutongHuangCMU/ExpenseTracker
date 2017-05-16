@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col s8 offset-s2">
+        <div class="card">
+            <br><br>
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <h5 class="font-changa-one warm-text">Expenses Between Dates:</h5>
+                    <div class="input-field col s4">
+                        <div class="row"><label>Start:</label></div>
+
+                        <input id="date1" type="datetime-local" ng-value="date1"  ng-model="date1" required/>
+                    </div>
+
+                    <div class="input-field col s4">
+                        <div class="row"><label>End:</label></div>
+                        <input id="date2" type="datetime-local" ng-value="date2" ng-model="date2" required/>
+                    </div>
+                    <div class="col s3 offset-s1">
+                        <br><br>
+                        <button class="btn punch" ng-click="calculate()">Calculate</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <h3>{{total}}</h3>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <div class="card">
+                    <br><br>
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <h5 class="font-changa-one warm-text">Expenses on Timeline:</h5>
+                            <div class="row font-varela-round">
+                                Clicks for the past
+                                <a href="javascript:void(0);" ng-click="getTime('hour')" ng-class="{'text-muted' : time === 'hour'}">Hour</a>
+                                <a href="javascript:void(0);" ng-click="getTime('day')" ng-class="{'text-muted' : time === 'day'}">Day</a>
+                                <a href="javascript:void(0);" ng-click="getTime('week')" ng-class="{'text-muted' : time === 'week'}">Week</a>
+                                <a href="javascript:void(0);" ng-click="getTime('month')" ng-class="{'text-muted' : time === 'month'}">Month</a>
+                                <a href="javascript:void(0);" ng-click="getTime('year')" ng-class="{'text-muted' : time === 'year'}">Year</a>
+                            </div>
+                            <canvas id="line" class="chart chart-line" chart-data="lineData"
+                                    chart-labels="lineLabels">
+                            </canvas>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
