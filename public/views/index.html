@@ -16,14 +16,30 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
+    <script src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
     <script src="/public/static/js/app.js"></script>
+    <script src="/public/static/js/controllers/homeController.js"></script>
+    <script src="/public/static/js/controllers/headerController.js"></script>
+    <script src="/public/static/js/controllers/modalController.js"></script>
 </head>
 <body ng-app="expenseTracker">
-<nav class="ocean-breeze">
-    <div class="nav-wrapper">
-        <a href="/#/" class="brand-logo font-changa-one">Expense Tracker</a>
-    </div>
-</nav>
+<div ng-controller="headerController">
+    <nav class="ocean-breeze">
+        <div class="nav-wrapper">
+            <div class="col s8 offset-s2">
+                <a href="/#/" class="brand-logo font-changa-one">Expense Tracker</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down" style="...">
+                    <button class="warm btn btn-warning btn-md" ng-show="!isLoggedIn" ng-click="signup()">Sign Up</button>
+                    <button class="punch btn btn-primary btn-md" ng-show="!isLoggedIn" ng-click="login()">Log In</button>
+                    <label class="font-varela-round faded-navy-text" ng-show="isLoggedIn">{{username}}</label>
+                    <label class="font-varela-round faded-navy-text" style="margin:10px" ng-show="isAdmin">(admin)</label>
+                    <button class="punch btn btn-warning btn-md" ng-show="isLoggedIn" ng-click="logout()">Sign Out</button>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
 <div ng-view></div>
 </body>
 </html>
