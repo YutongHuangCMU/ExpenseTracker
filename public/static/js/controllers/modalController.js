@@ -14,6 +14,7 @@ app.controller('modalController', function ($scope, $http, $uibModalInstance, lo
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
+    //used to authenticate the info input
     function authenticate(postUrl) {
         $http.post("/api/v1/" + postUrl , {
             username: $scope.username,

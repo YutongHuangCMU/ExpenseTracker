@@ -2,6 +2,7 @@ var app = angular.module('expenseTracker');
 
 app.controller("reportController", function ($window, $scope, $http) {
     $scope.username = JSON.parse($window.sessionStorage.username || '{}');
+    //used to get the logs spread on timeline
     $scope.getTime = function(info) {
         $scope["lineData"] = [];
         $scope["lineLabels"] = [];
@@ -32,7 +33,7 @@ app.controller("reportController", function ($window, $scope, $http) {
     $scope.getTime("hour");
     $scope.total = 0;
 
-
+    //used to calculate the total expense during a period
     $scope.calculate = function () {
         var newDate1 = new Date($scope.date1);
         var newDate2 = new Date($scope.date2);

@@ -4,7 +4,7 @@ app.controller('headerController', function($window, $scope, $uibModal, $locatio
     $scope.isLoggedIn = JSON.parse($window.sessionStorage.isLoggedIn || false);
     $scope.username = JSON.parse($window.sessionStorage.username || '{}');
     $scope.isAdmin = JSON.parse($window.sessionStorage.isAdmin || false);
-
+    // used to open the login modal
     function openModal(loginType) {
         $uibModal.open({
             templateUrl: "./public/views/modal.html",
@@ -36,7 +36,7 @@ app.controller('headerController', function($window, $scope, $uibModal, $locatio
         updateSessionStorage({}, {}, false, false);
         $location.path("/");
     };
-
+    //used to update the session storage
     function updateSessionStorage(username, token, isLoggedIn, isAdmin) {
         $window.sessionStorage.username = JSON.stringify(username);
         $window.sessionStorage.token = JSON.stringify(token);

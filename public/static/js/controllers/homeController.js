@@ -5,6 +5,7 @@ app.controller('homeController', function($window, $scope, $http, $uibModal, $lo
     $scope.isLoggedIn = JSON.parse($window.sessionStorage.isLoggedIn || false);
     $scope.isAdmin = JSON.parse($window.sessionStorage.isAdmin || false);
 
+    //update the login status
     $scope.$watch(function () {
         return $window.sessionStorage.isLoggedIn;
     }, function (newValue, oldValue) {
@@ -14,6 +15,7 @@ app.controller('homeController', function($window, $scope, $http, $uibModal, $lo
             getMyLogs();
         }
     });
+    //used to log the expense
     $scope.submit = function () {
         if ($scope.isLoggedIn) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse($window.sessionStorage.token || "{}");
@@ -34,11 +36,11 @@ app.controller('homeController', function($window, $scope, $http, $uibModal, $lo
                 getMyLogs();
             });
     };
-
+    //triggered when the update button is clicked
     $scope.update = function (log) {
         openModal(log);
     };
-
+    //triggered when the delete button is clicked
     $scope.delete = function (log) {
         $http.post("api/v1/deleteLog", {
             log: log
@@ -47,24 +49,24 @@ app.controller('homeController', function($window, $scope, $http, $uibModal, $lo
                 getMyLogs();
             });
     };
-
+    //triggered when the report button is clicked
     $scope.report = function () {
         $location.path("/report");
     };
-
+    //triggered when the all logs button is clicked
     $scope.allLogs = function () {
         $location.path("/logs");
     };
-
+    //used to update the list of logs stated
     var getMyLogs = function () {
         $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse($window.sessionStorage.token || "{}");
         $http.get("api/v1/getMyLogs")
             .success(function (data) {
-                $scope.list = [];
+                console.log(data);
                 $scope.list = data;
             });
     };
-
+    //used to open a expense modal for modification
     function openModal(log) {
         $uibModal.open({
             templateUrl: "./public/views/expenseModal.html",
@@ -76,7 +78,6 @@ app.controller('homeController', function($window, $scope, $http, $uibModal, $lo
                 }
             }
         }).result.then(function (data) {
-
         });
     }
     getMyLogs();

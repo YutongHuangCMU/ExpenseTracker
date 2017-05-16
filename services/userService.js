@@ -12,6 +12,14 @@ var redisClient = redis.createClient(port, host);
 
 var salt = bcrypt.genSaltSync(10);
 
+/**
+ * The function is used to sign up a user. Username cannot be used before. If it is a admin user, it will match the access code.
+ * @param username username
+ * @param password password
+ * @param accessCode accessCode
+ * @param isAdmin isAdmin
+ * @param callback
+ */
 var signup = function (username, password, accessCode, isAdmin, callback) {
     bcrypt.hash(password, salt, null, function (err, hash) {
         UserModel.findOne({username: username}, function (err, user) {
@@ -45,6 +53,13 @@ var signup = function (username, password, accessCode, isAdmin, callback) {
     });
 };
 
+/**
+ * The function is used to log in a user based on user type
+ * @param username username
+ * @param password password
+ * @param isAdmin isAdmin
+ * @param callback
+ */
 var login = function (username, password, isAdmin, callback) {
     UserModel.findOne({username: username, isAdmin: isAdmin}, function (err, user) {
         if (user) {
@@ -63,6 +78,11 @@ var login = function (username, password, isAdmin, callback) {
     })
 };
 
+/**
+ * The function is used to generate the token used to hash the password.
+ * @param username username
+ * @param callback
+ */
 function generateToken (username, callback) {
     redisClient.get("jwtKey", function (err, secretKey) {
         if (secretKey == null) {
@@ -75,6 +95,11 @@ function generateToken (username, callback) {
     });
 }
 
+/**
+ * The function is used to verify the token and keys
+ * @param token token
+ * @param callback
+ */
 var decodeToken = function (token, callback) {
     if (token == null) {
         callback("Token is null", null);

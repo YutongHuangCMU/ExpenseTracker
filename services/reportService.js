@@ -1,5 +1,11 @@
 var ExpenseModel = require("../models/expenseModel");
 
+/**
+ * The function is used to get logs based on timeline, according to the different criteria.
+ * @param username username
+ * @param info criteria
+ * @param callback
+ */
 var getReportDateTime = function (username, info, callback) {
     var groupId = "";
     if (info === "hour") {
@@ -56,6 +62,13 @@ var getReportDateTime = function (username, info, callback) {
     });
 };
 
+/**
+ * The function is used to get logs between certain time range
+ * @param username username
+ * @param date1 start time
+ * @param date2 end time
+ * @param callback
+ */
 var getReportIntervalTotal = function (username, date1, date2, callback) {
     var newDate1 = new Date(date1);
     var newDate2 = new Date(date2);

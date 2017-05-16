@@ -8,6 +8,8 @@ var reportService = require("../services/reportService");
 
 var jsonParser = bodyParser.json();
 
+
+//api used to sign up
 router.post("/signup", jsonParser, function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
@@ -21,6 +23,7 @@ router.post("/signup", jsonParser, function (req, res) {
     });
 });
 
+//api used to log in
 router.post("/login", jsonParser, function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
@@ -33,6 +36,7 @@ router.post("/login", jsonParser, function (req, res) {
     });
 });
 
+//api used to log expense
 router.post("/logExpense", jsonParser, function (req, res) {
     var username = req.body.username;
     var amount = req.body.amount;
@@ -46,19 +50,20 @@ router.post("/logExpense", jsonParser, function (req, res) {
     });
 });
 
+//api used to update the expense
 router.post("/updateExpense", jsonParser, function (req, res) {
     var _id = req.body._id;
     var amount = req.body.amount;
     var date = req.body.date;
     var des = req.body.des;
-    expenseService.updateExpense(_id, amount, date, des, function (err, mes) {
+    expenseService.updateExpense(_id, amount, date, des, function (err) {
         res.json({
-            err: err,
-            res: mes
+            err: err
         });
     });
 });
 
+//api used to get all logs for a user
 router.get("/getMyLogs", jsonParser, function (req, res) {
     var authHeader = req.headers['authorization'];
     if (authHeader) {
@@ -81,13 +86,14 @@ router.get("/getMyLogs", jsonParser, function (req, res) {
     }
 });
 
+//api used to get all logs for admin
 router.get("/allLogs", jsonParser, function (req, res) {
     expenseService.getAllLogs(function (allList) {
         res.json(allList);
     });
 });
 
-
+//api used to delete a log
 router.post("/deleteLog", jsonParser, function (req, res) {
     var log = req.body.log;
     expenseService.deleteLog(log, function (err, mes) {
@@ -98,6 +104,7 @@ router.post("/deleteLog", jsonParser, function (req, res) {
     });
 });
 
+//api used to get logs between a time range
 router.get("/report/:username/:date1/:date2", function(req, res) {
     console.log("enter");
     reportService.getReportIntervalTotal(req.params.username, req.params.date1, req.params.date2, function(err, data) {
@@ -108,6 +115,7 @@ router.get("/report/:username/:date1/:date2", function(req, res) {
     });
 });
 
+//api used to get the logs on timeline
 router.get("/report/:username/:info", function(req, res) {
     console.log("enter2");
     reportService.getReportDateTime(req.params.username, req.params.info, function(data) {
@@ -116,8 +124,11 @@ router.get("/report/:username/:info", function(req, res) {
 });
 
 
-
-
+/**
+ * Function used to get the token from the header information
+ * @param authHeader the header
+ * @returns {*}
+ */
 function getToken(authHeader) {
     var splits = authHeader.split(' ');
     if (splits.length != 2) return null;

@@ -1,5 +1,6 @@
 var app = angular.module("expenseTracker", ["ngRoute", "ngResource", "chart.js", 'ui.bootstrap']);
 
+//the angular app configuration
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
