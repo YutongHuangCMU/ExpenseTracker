@@ -21,6 +21,7 @@
     <script src="/public/static/js/controllers/homeController.js"></script>
     <script src="/public/static/js/controllers/headerController.js"></script>
     <script src="/public/static/js/controllers/modalController.js"></script>
+    <script src="/public/static/js/controllers/expenseModalController.js"></script>
 </head>
 <body ng-app="expenseTracker">
 <div ng-controller="headerController">
@@ -42,4 +43,13 @@
 
 <div ng-view></div>
 </body>
+<script>
+    $(document).ready(function() {
+        $('input#input_text, textarea#textarea1').characterCounter();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 17 // Creates a dropdown of 15 years to control year
+        });
+    });
+</script>
 </html>

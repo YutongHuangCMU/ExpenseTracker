@@ -84,3 +84,9 @@ thead {
     width:70% !important;
     height: 70% !important;
 }
+
+.btn-sm {
+    border: none;
+    font-size: small;
+    background-color: white;
+}

@@ -14,7 +14,7 @@ var salt = bcrypt.genSaltSync(10);
 
 var signup = function (username, password, accessCode, isAdmin, callback) {
     bcrypt.hash(password, salt, null, function (err, hash) {
-        UserModel.findOne({username: username, isAdmin: isAdmin}, function (err, user) {
+        UserModel.findOne({username: username}, function (err, user) {
             if (user) {
                 callback("The username is not available!", null);
             } else {
@@ -91,7 +91,6 @@ var decodeToken = function (token, callback) {
                         if (username == null) {
                             callback("User not found", null);
                         } else {
-                            console.log("User verified " + username);
                             callback(null, username);
                         }
                     }
