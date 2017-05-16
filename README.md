@@ -35,4 +35,12 @@ The application is not fully developed, some functionalities might still have sm
 5. Please do command line ```redis-server``` to set up the redis server. If redis is not already installed, please follow the instruction at https://redis.io/
 5. Please use ```ACCESSCODE="XXX" node server.js``` on command line to run server. The port is on 3000.
 
-
+## Test
+To test the application, here are some tips and suggestions:
+1. the app will be launched at localhost:3000
+2. default page is welcome page. Once logged in, the content will change to a form used to log expense, and a table shows the current logs.
+3. the table will give the options of update and delete for each record.
+4. there is a report button direct user to the report page to see report.
+5. report page contains a form used to trigger the expense during certain time range, and a chart shows the expenses on timeline.
+6. If the logged in user is an admin, there will be one more button says "all logs", used to get all expenses group by users.
+Some sample data is ready in the database.
